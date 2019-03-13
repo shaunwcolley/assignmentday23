@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Grocery App using Firebase</title>
+  </head>
+  <body>
+    <div id="container">
+      <div id="pageHeader">
+        <h2>Grocery List App*</h2>
+        <span>*WIP: only has capability to add categories.</span>
+      </div>
+      <div id="menuBar">
+        <div>
+          <input id="categoryTextBox" type="text" placeholder="Type a Store Name"/>
+        </div>
+        <div>
+          <button id="addBtn">Add</button>
+        </div>
+        <div>
+          <button id="viewAllBtn">View All Stores</button>
+        </div>
+      </div>
+      <div class="pageBody">
+          <ul id="groceryDisplayUL">
+          </ul>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAkZVgE-J9c-AGirqAUl7ulhW0gNQ0GBwk",
+      authDomain: "mytodolist-de20c.firebaseapp.com",
+      databaseURL: "https://mytodolist-de20c.firebaseio.com",
+      projectId: "mytodolist-de20c",
+      storageBucket: "mytodolist-de20c.appspot.com",
+      messagingSenderId: "100582381958"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="app.js"></script>
+
+</html>
