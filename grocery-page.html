@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>Login page for Grocery App using Firebase</title>
+    <title>Grocery App using Firebase</title>
   </head>
   <body>
     <div id="container">
@@ -11,28 +11,15 @@
         <h2>Grocery List App*</h2>
         <span>*WIP: only has capability to add categories.</span>
       </div>
-      <div>
-        <div id="registerDiv">
-          <div>
-            <input id="registerEmailTextBox" type="text" placeholder="Email"/>
-          </div>
-          <div>
-            <input id="registerPasswordTextBox" type="text" placeholder="Password"/>
-          </div>
-          <div>
-            <button id="registerBtn">Register</button>
-          </div>
+      <div id="menuBar">
+        <div>
+          <input id="categoryTextBox" type="text" placeholder="Type a Store Name"/>
         </div>
-        <div id="loginDiv">
-          <div>
-            <input id="loginEmailTextBox" type="text" placeholder="Email"/>
-          </div>
-          <div>
-            <input id="loginPasswordTextBox" type="text" placeholder="Password"/>
-          </div>
-          <div>
-            <button id="loginBtn">Login</button>
-          </div>
+        <div>
+          <button id="addBtn">Add</button>
+        </div>
+        <div>
+          <button id="viewAllBtn">View All Stores</button>
         </div>
       </div>
       <div class="pageBody">
@@ -55,6 +42,6 @@
     };
     firebase.initializeApp(config);
   </script>
-  <script src="js/login.js"></script>
+  <script src="js/app.js"></script>
 
 </html>
