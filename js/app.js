@@ -6,6 +6,7 @@ let menuBar = document.getElementById("menuBar")
 
 let database = firebase.database()
 let categories = []
+
 let categoriesRef = database.ref("categories")
 
 addBtn.addEventListener('click', function(){
@@ -34,30 +35,14 @@ database.ref("categories")
 
 function displayCategories() {
   let categoryLIItems = categories.map(function(category){
-    if(typeof Object.values(category.value.items) === 'undefined') {
-      return `<li class="categoryDisplay">
-                <div class="storeDiv">
-                  <div class="storeHeader">
-                    <h4>${category.value.categoryName}</h4>
-                  </div>
-                  <div>
-                    <button onclick="deleteCategory('${category.key}')">Delete</button>
-                  </div>
-                </div>
-                <div class="addItems">
-                    <input class="groceryItemTextBox" type="text" placeholder="Grocery Item"/>
-                    <input type="hidden" value="${category.key}"/>
-                    <button onclick="addItem(this)" class="addItemBtn">Add</button>
-                </div>
-                <ul class="groceryItemUl">
-                <ul>
-              </li>`
-    }else{
+    try {
       let items = Object.values(category.value.items)
+      let itemKeys = Object.keys(category.value.items)
       let groceryItems = []
         for(let i = 0; i < items.length; i++) {
           let item = items[i].item
-          let liItem =`<li> ${item}
+          let liItem =`<li> <span>${item}</span>
+                      <button onclick="deleteItem('${itemKeys[i]}', '${category.key}')">Delete</button>
                     </li>`
           groceryItems.push(liItem)
         }
@@ -77,6 +62,25 @@ function displayCategories() {
                 </div>
                 <ul class="groceryItemUl">
                 ${groceryItems.join('')}
+                <ul>
+              </li>`
+    }
+    catch {
+      return `<li class="categoryDisplay">
+                <div class="storeDiv">
+                  <div class="storeHeader">
+                    <h4>${category.value.categoryName}</h4>
+                  </div>
+                  <div>
+                    <button onclick="deleteCategory('${category.key}')">Delete</button>
+                  </div>
+                </div>
+                <div class="addItems">
+                    <input class="groceryItemTextBox" type="text" placeholder="Grocery Item"/>
+                    <input type="hidden" value="${category.key}"/>
+                    <button onclick="addItem(this)" class="addItemBtn">Add</button>
+                </div>
+                <ul class="groceryItemUl">
                 <ul>
               </li>`
       }
@@ -108,6 +112,10 @@ function hideCategories(button) {
     menuBar.children[3].remove()
     groceryDisplayUL.innerHTML = ``
   })
+}
+
+function deleteItem(itemKey, categoryKey) {
+  categoriesRef.child(categoryKey).child('items').child(itemKey).remove()
 }
 
 function deleteCategory(key) {
